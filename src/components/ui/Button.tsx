@@ -30,14 +30,16 @@ const variantStyles = {
 }
 
 const sizeStyles = {
-    "sm": "py-1 px-2",
-    "md": "py-2 px-4",
+    "sm": "py-1 px-2 ",
+    "md": "py-2 px-4 ",
     "lg": "py-3 px-6",
 }
 
 
-const defaultStyles = "rounded-md flex"
+const defaultStyles = "rounded-lg flex items-center justify-center font-medium hover:opacity-90 transition-opacity duration-300 ease-in-out";
 
+// horizontal center justify-center
+// vertically items-center font-medium
 // export const Button = (props: ButtonProps) => {
 //     return <button className={'${varientStyles[props.]} ${defaultStyles} ${sizeStyles[props.size]}'}>{ props.text}</button>
 // }
@@ -52,6 +54,16 @@ const defaultStyles = "rounded-md flex"
 
 //  `${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}`
 
+
+// export function Button({ variant, text, startIcon }: ButtonProps) {
+//   return (
+//     <button className={variantClasses[variant] + " " + defaultStyles}>
+//       {startIcon}
+//       {text}
+//     </button>
+//   );
+// }
+
 export const Button = (props: ButtonProps) => {
     return (
       <button
@@ -60,10 +72,10 @@ export const Button = (props: ButtonProps) => {
           ` ${defaultStyles} ${sizeStyles[props.size] } ${IconColor[props.color]}`
         }
         >
-            {props.startIcon ? <div className="pr-2">{props.startIcon}</div>  : null}
+            {props.startIcon ? <div className="pr-2 flex">{props.startIcon}</div>  : null}
         {props.text}
       </button>
     );
 }
 
-<Button variant="primary" size="md" onClick={() => {}} text="asd" />
+<Button variantStyles="primary " size="md" onClick={() => {}} text="asd" />;

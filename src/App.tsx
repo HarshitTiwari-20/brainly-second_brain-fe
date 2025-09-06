@@ -1,19 +1,22 @@
 
+import { useState } from 'react';
 import './App.css'
 import { Button } from './components/ui/Button'
 import { Card } from './components/ui/Card';
+import { CreateContent } from './components/ui/CreateContent';
 import { PlusIcon } from './icons/Plusicon';
 import { ShareIcon } from './icons/ShareIcon';
 
 function App() {
-  
-
+  const [ModelOpen, setModelOpen] = useState(false);
   return (
     <div className="p-4">
+      <CreateContent open={ModelOpen} onClose={() => setModelOpen(false)} />
       <div className="App flex justify-end ">
-        <Button
+        <Button onClick={() => {setModelOpen(true)}}
           startIcon={<PlusIcon size="md" />}
           size="md"
+          variant='primary'
           color="primary"
           text="Add Content"
         />
@@ -35,7 +38,7 @@ function App() {
 
         <Card
           type="youtube"
-          link="https://www.youtube.com/watch?v=Xs0Lxif1u9E"
+          link="https://www.youtube.com/watch?v="
           title="First Video"
         />
       </div>

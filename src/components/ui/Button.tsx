@@ -5,6 +5,7 @@ interface ButtonProps {
     variant: Variant;
     size: "sm" | "md" | "lg";
     text: string;
+    color: "primary" | "secondary";
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     onClick: () => void;

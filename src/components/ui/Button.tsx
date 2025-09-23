@@ -2,13 +2,13 @@ import type { ReactElement } from "react";
 import { IconColor } from "../../icons";
 type Variant = "primary" | "secondary";
 interface ButtonProps {
-    variant: Variant;
-    size: "sm" | "md" | "lg";
+    variant?: Variant;
+    size?: "sm" | "md" | "lg";
     text: string;
-    color: "primary" | "secondary";
+    color?: "primary" | "secondary";
     startIcon?: ReactElement;
     endIcon?: ReactElement;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 //easy way to write a button component
@@ -79,4 +79,4 @@ export const Button = (props: ButtonProps) => {
     );
 }
 
-<Button variantStyles="primary " size="md" onClick={() => {}} text="asd" />;
+<Button variantStyles="primary" size="md" onClick={() => {}} text="asd" />;

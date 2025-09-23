@@ -33,6 +33,8 @@ export function Card({title, link, type}: CardProps) {
             {type === "youtube" && (
               <iframe
                 className="w-full"
+                //src={link}
+
                 src={link.replace("watch?v=", "embed/")}
                 title="YouTube video player"
                 frameBorder="0"

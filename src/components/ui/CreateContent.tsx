@@ -23,7 +23,7 @@ export function CreateContent({ open, onClose }: { open: boolean; onClose: () =>
                             </div>
 
                         <div className="flex justify-center">
-                            <Button  variant="primary" text="Submit" />
+                            <Button  variant="primary" text="Submit" color="primary" size="md" />
                         </div>
                     </span>
                 </div>     

@@ -6,11 +6,14 @@ import { Card } from './components/ui/Card';
 import { CreateContent } from './components/ui/CreateContent';
 import { PlusIcon } from './icons/Plusicon';
 import { ShareIcon } from './icons/ShareIcon';
+import { Sidebar } from './components/Sidebar/Sidebar';
 
 function App() {
   const [ModelOpen, setModelOpen] = useState(false);
   return (
-    <div className="p-4">
+    <div >
+      <Sidebar />
+    <div className="p-4 ml-72 min-h-screen bg-gray-100 border-4 ">
       <CreateContent open={ModelOpen} onClose={() => setModelOpen(false)} />
       <div className="App flex justify-end ">
         <Button onClick={() => {setModelOpen(true)}}
@@ -38,10 +41,11 @@ function App() {
 
         <Card
           type="youtube"
-          link="https://www.youtube.com/watch?v="
+          link="https://www.youtube.com/watch?v=vwZj1K0e9U8"
           title="First Video"
         />
       </div>
+    </div>
     </div>
   );
 }

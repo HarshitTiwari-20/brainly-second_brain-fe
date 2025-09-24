@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
-import { IconColor } from "../../icons";
+
 type Variant = "primary" | "secondary";
 interface ButtonProps {
-    variant?: Variant;
+    variant: Variant;
     size?: "sm" | "md" | "lg";
     text: string;
     color?: "primary" | "secondary";
@@ -10,6 +10,7 @@ interface ButtonProps {
     endIcon?: ReactElement;
     onClick?: () => void;
     fullWidth?: boolean;
+    loading?: boolean;
 }
 
 //easy way to write a button component
@@ -35,10 +36,10 @@ const sizeStyles = {
     "sm": "py-1 px-2 ",
     "md": "py-2 px-4 ",
     "lg": "py-3 px-6",
-}
+};
 
 
-const defaultStyles = "rounded-lg flex items-center justify-center font-medium hover:opacity-90 transition-opacity duration-300 ease-in-out";
+const defaultStyles = "px-4 py-2 rounded-md font-light flex items-center hover:opacity-90 transition-opacity duration-300 ease-in-out";
 
 // horizontal center justify-center
 // vertically items-center font-medium
@@ -57,16 +58,17 @@ const defaultStyles = "rounded-lg flex items-center justify-center font-medium h
 //  `${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}`
 
 
-export function Button({ variant = "primary", size = "md", text, startIcon, onClick, fullWidth  }: ButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${fullWidth ? "w-full" : ""}`}
-    >
-      {startIcon ? <div className="pr-2 flex">{startIcon}</div> : null}
-      {text}
-     </button>
-   );
+export function Button({variant, text, startIcon, onClick, fullWidth, loading}: ButtonProps) {
+    return <button
+        onClick={onClick} 
+        className={variantStyles[variant] + " " + defaultStyles + `${fullWidth ? " w-full flex justify-center items-center" : ""} 
+        ${loading ? "opacity-45	" : ""}`} 
+        disabled={loading}>
+        <div className=" pt-2  ">
+            {startIcon}
+        </div>
+        {text}
+    </button>
  }
 
 // export const Button = (props: ButtonProps) => {

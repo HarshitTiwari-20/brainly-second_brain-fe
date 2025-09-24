@@ -1,8 +1,42 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { CrossIcon } from "../../icons/CrossIcon";
 import { Button } from "./Button";
+import { Input } from "./input";
+import axios from "axios";
+import { BACKEND_URL } from "../../config";
+
+
+enum ContentType {
+    Twitter = "twitter",
+    YouTube = "youtube"
+}
+
 
 export function CreateContent({ open, onClose }: { open: boolean; onClose: () => void }) {
+    const titleRef = useRef<HTMLInputElement>(null);
+    const linkRef = useRef<HTMLInputElement>(null);
+
+
+    const [type, setType] = useState(ContentType.YouTube);
+
+
+
+
+   async function addContent(){
+        const title = titleRef.current?.value;
+        const link = linkRef.current?.value;
+        await axios.post(BACKEND_URL + "/api/vi/content", {
+            link,
+            title,
+            type
+        },{
+            headers: {
+                "Authorization": localStorage.getItem("token")
+            }
+        })
+        
+    }
+    
     return (
         <div>
            {open && <div> 
@@ -18,12 +52,26 @@ export function CreateContent({ open, onClose }: { open: boolean; onClose: () =>
                             </div>
                         </div>
                             <div>
-                                <Input placeholder={"Title"} />
-                                <Input placeholder={"Link"} />
+                                <Input reference={titleRef} placeholder={"Title"} />
+                                <Input reference={linkRef} placeholder={"Link"} />
                             </div>
+                           <div>
+                            <h1>Type</h1>
+                            <div className="flex gap-1 justify-center pb-2">
+                                <Button text="Youtube" variant={type === ContentType.Youtube ? "primary" : "secondary"} onClick={() => {
+                                    setType(ContentType.Youtube)
+                                }}></Button>
+                                <Button text="Twitter" variant={type === ContentType.Twitter ? "primary" : "secondary"} onClick={() => {
+                                    setType(ContentType.Twitter)
+                                }}></Button>
+                            </div>
+                        </div>
+                            
+                           
+                            
 
                         <div className="flex justify-center">
-                            <Button  variant="primary" text="Submit" color="primary" size="md" />
+                            <Button onClick={addContent}  variant="primary" text="Submit" color="primary" size="md" />
                         </div>
                     </span>
                 </div>     
@@ -36,16 +84,4 @@ export function CreateContent({ open, onClose }: { open: boolean; onClose: () =>
 
 
 
-function Input({ onChange, placeholder }: { onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; placeholder?: string }) {
-    return (
-        <div>
-            <input
-                placeholder={placeholder}
-                type="text"
-                className="px-4 py-2 border rounded m-2"
-                onChange={onChange}
-            />
-        </div>
-    );
-}   
 

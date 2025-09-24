@@ -9,6 +9,7 @@ interface ButtonProps {
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     onClick?: () => void;
+    fullWidth?: boolean;
 }
 
 //easy way to write a button component
@@ -56,27 +57,30 @@ const defaultStyles = "rounded-lg flex items-center justify-center font-medium h
 //  `${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}`
 
 
-// export function Button({ variant, text, startIcon }: ButtonProps) {
-//   return (
-//     <button className={variantClasses[variant] + " " + defaultStyles}>
-//       {startIcon}
-//       {text}
-//     </button>
-//   );
+export function Button({ variant = "primary", size = "md", text, startIcon, onClick, fullWidth  }: ButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${fullWidth ? "w-full" : ""}`}
+    >
+      {startIcon ? <div className="pr-2 flex">{startIcon}</div> : null}
+      {text}
+     </button>
+   );
+ }
+
+// export const Button = (props: ButtonProps) => {
+//     return (
+//       <button
+//         onClick={props.onClick}
+//         className={
+//           ` ${defaultStyles} ${sizeStyles[props.size] } ${IconColor[props.color]}`
+//         }
+//         >
+//             {props.startIcon ? <div className="pr-2 flex">{props.startIcon}</div>  : null}
+//         {props.text}
+//       </button>
+//     );
 // }
 
-export const Button = (props: ButtonProps) => {
-    return (
-      <button
-        onClick={props.onClick}
-        className={
-          ` ${defaultStyles} ${sizeStyles[props.size] } ${IconColor[props.color]}`
-        }
-        >
-            {props.startIcon ? <div className="pr-2 flex">{props.startIcon}</div>  : null}
-        {props.text}
-      </button>
-    );
-}
-
-<Button variantStyles="primary" size="md" onClick={() => {}} text="asd" />;
+//<Button variantStyles="primary" size="md" onClick={() => {}} text="asd" />;
